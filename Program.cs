@@ -72,19 +72,15 @@ Dvd dvd = new Dvd("Vola farfalla", 1999, "Scienze", "Edward Alan Poe");
 documents.Add( new Book(12345, 235, "Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve"));
 documents.Add(new Book(87484, 235, "Vola farfalla", 1999, "Scienze", "Edward Alan Poe"));
 documents.Add(new Dvd(12584, 126, "Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve"));
-
+documents[0].isAvailable = true;
+documents[1].isAvailable = false;
+documents[2].isAvailable = true;
 registeredUsers.Add(new RegisteredUser("Prencipe", "Carlo", "pippo@libero.it", "password123", "3271259845"));
-
-
-foreach(Document document in documents)
-{
-    Console.WriteLine(document.ReadInformation());
-}
 
 
 // funzione ricerca  per titolo
 
-void SearchByTitleLibrary() 
+Document SearchByTitleLibrary() 
 {
     string wordSearched = user.SearchByTitle();
     foreach(Document document in documents)
@@ -92,12 +88,17 @@ void SearchByTitleLibrary()
         if (wordSearched == document.title)
         { 
             Console.WriteLine(document.ReadInformation());
+            return document;
         }
     }
+    return null;
 }
 
 
-void SearchByCodeLibrary()
+
+// funzione ricerca  per codice
+
+Document SearchByCodeLibrary()
 {
     int codeSearched = user.SearchByCode();
 
@@ -110,6 +111,7 @@ void SearchByCodeLibrary()
             if (codeSearched == libro.bookIsbn)
             {
                 Console.WriteLine(libro.ReadInformation());
+                return libro;
             }
         }
         else
@@ -118,14 +120,13 @@ void SearchByCodeLibrary()
             if (codeSearched == dvd.serialNumber)
             {
                 Console.WriteLine(dvd.ReadInformation());
+                return dvd;
             }
-        }
-            
-            
-            
-            
+        }    
     }
+    return null;
 }
+
 
 Console.Write("Vuoi cercare per 'titolo' o per 'codice'? ");
 
@@ -133,9 +134,49 @@ string typeOfResearch = Console.ReadLine();
 
 if(typeOfResearch == "titolo")
 {
-    SearchByTitleLibrary();
+
+    Document itemSearched = SearchByTitleLibrary();
+    if (itemSearched.isAvailable)
+    {
+
+        Console.WriteLine("Prodotto disponibile vuoi prenderlo in prestito? y or n");
+        string validator = Console.ReadLine();
+        Console.Write(validator);
+        if (validator == "y")
+        {
+            Console.Write("Entro?");
+            Loan loan = new Loan(user, itemSearched);
+            loan.LoanTime();
+        }
+
+    }
+    else
+    {
+        Console.WriteLine("Non disponibile");
+    }
+   
 }
 else
 {
-    SearchByCodeLibrary();
+    Document itemSearched = SearchByCodeLibrary();
+    if (itemSearched.isAvailable)
+    {
+
+        Console.WriteLine("Prodotto disponibile vuoi prenderlo in prestito? y or n");
+        char validator = char.Parse(Console.ReadLine());
+        if (validator == 'y')
+        {
+            Console.Write("Entro?");
+            Loan loan = new Loan(user, itemSearched);
+            loan.LoanTime();
+
+        }
+    }
+    else
+    {
+
+        Console.WriteLine("Non disponibile");
+
+    }
+
 }
