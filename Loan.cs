@@ -34,7 +34,8 @@ namespace csharp_biblioteca
             char validator = char.Parse(Console.ReadLine());
             if (validator == 'y')
             {
-
+                document.takenFrom = utenteregistrato
+                document.isAvailable = false;
                 Console.Write( $"inizio prestito in {dateStartLoan}, fine prestito in {dateEndLoan}");
 
 

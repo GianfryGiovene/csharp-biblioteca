@@ -12,6 +12,7 @@ namespace csharp_biblioteca
         int year;
         string sector;
         public bool isAvailable;
+        public string takenFrom;
         string author;
         int shelfNumber; 
 
@@ -23,7 +24,7 @@ namespace csharp_biblioteca
             this.author = author;
         }
 
-        public string ReadInformation()
+        public string SetInformation()
         {
             return $"Titolo: {title}\nAnno: {year}\nGenere: {sector}\nDisponibilità : {isAvailable}\nAutore: {author}\n\n";
         }

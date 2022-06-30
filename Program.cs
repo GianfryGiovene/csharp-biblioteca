@@ -66,8 +66,7 @@ List<Document> documents = new List<Document>();
 
 RegisteredUser user = new RegisteredUser("Pippo", "Lacco", "pippo@libero.it", "password123", "3271259845");
 
-Book book = new Book("Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve");
-Dvd dvd = new Dvd("Vola farfalla", 1999, "Scienze", "Edward Alan Poe");
+
 
 documents.Add( new Book(12345, 235, "Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve"));
 documents.Add(new Book(87484, 235, "Vola farfalla", 1999, "Scienze", "Edward Alan Poe"));
@@ -87,7 +86,7 @@ Document SearchByTitleLibrary()
     {
         if (wordSearched == document.title)
         { 
-            Console.WriteLine(document.ReadInformation());
+            Console.WriteLine(document.SetInformation());
             return document;
         }
     }
@@ -102,6 +101,8 @@ Document SearchByCodeLibrary()
 {
     int codeSearched = user.SearchByCode();
 
+    Book book = new Book("Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve");
+   
     foreach (Document document in documents)
     {
         
@@ -110,7 +111,7 @@ Document SearchByCodeLibrary()
             Book libro = (Book)document;
             if (codeSearched == libro.bookIsbn)
             {
-                Console.WriteLine(libro.ReadInformation());
+                Console.WriteLine(libro.SetInformation());
                 return libro;
             }
         }
@@ -119,7 +120,7 @@ Document SearchByCodeLibrary()
             Dvd dvd = (Dvd)document;
             if (codeSearched == dvd.serialNumber)
             {
-                Console.WriteLine(dvd.ReadInformation());
+                Console.WriteLine(dvd.SetInformation());
                 return dvd;
             }
         }    
@@ -144,7 +145,7 @@ if(typeOfResearch == "titolo")
         Console.Write(validator);
         if (validator == "y")
         {
-            Console.Write("Entro?");
+            
             Loan loan = new Loan(user, itemSearched);
             loan.LoanTime();
         }
@@ -166,7 +167,7 @@ else
         char validator = char.Parse(Console.ReadLine());
         if (validator == 'y')
         {
-            Console.Write("Entro?");
+            
             Loan loan = new Loan(user, itemSearched);
             loan.LoanTime();
 
@@ -180,3 +181,5 @@ else
     }
 
 }
+
+Console.WriteLine("vediamo un po"+documents[0].SetInformation());
