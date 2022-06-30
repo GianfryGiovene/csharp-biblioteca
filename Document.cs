@@ -27,5 +27,7 @@ namespace csharp_biblioteca
         {
             return $"Titolo: {title}\nAnno: {year}\nGenere: {sector}\nDisponibilità : {isAvailable}\nAutore: {author}\n\n";
         }
+
+        
     }
 }

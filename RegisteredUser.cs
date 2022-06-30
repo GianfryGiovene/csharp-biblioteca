@@ -50,6 +50,14 @@ namespace csharp_biblioteca
 
             return titoloCercato;
         }
-    
+        public int SearchByCode()
+        {
+            Console.Write("Cerca per codice: ");
+            int codiceCercato = Int32.Parse(Console.ReadLine());
+
+            return codiceCercato;
+        }
+
+
     }
 }

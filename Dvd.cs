@@ -8,7 +8,7 @@ namespace csharp_biblioteca
 {
     internal class Dvd : Document
     {
-        int serialNumber;
+        public int serialNumber;
         int filmDuration;
 
         public Dvd(int serialNumber, int filmDuration, string title, int year, string sector, string author) : base(title, year, sector, author)
@@ -16,5 +16,7 @@ namespace csharp_biblioteca
             this.serialNumber = serialNumber;
             this.filmDuration = filmDuration;
         }
+
+        public Dvd(string title, int year, string sector, string author) : base(title, year, sector, author) { }
     }
 }

@@ -66,6 +66,9 @@ List<Document> documents = new List<Document>();
 
 RegisteredUser user = new RegisteredUser("Pippo", "Lacco", "pippo@libero.it", "password123", "3271259845");
 
+Book book = new Book("Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve");
+Dvd dvd = new Dvd("Vola farfalla", 1999, "Scienze", "Edward Alan Poe");
+
 documents.Add( new Book(12345, 235, "Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve"));
 documents.Add(new Book(87484, 235, "Vola farfalla", 1999, "Scienze", "Edward Alan Poe"));
 documents.Add(new Dvd(12584, 126, "Cacciatore di acquiloni", 2008, "Romance", "Pipino il Breve"));
@@ -79,11 +82,10 @@ foreach(Document document in documents)
 }
 
 
-// ricerca per titolo
+// funzione ricerca  per titolo
 
 void SearchByTitleLibrary() 
 {
-
     string wordSearched = user.SearchByTitle();
     foreach(Document document in documents)
     {
@@ -92,8 +94,48 @@ void SearchByTitleLibrary()
             Console.WriteLine(document.ReadInformation());
         }
     }
-    
 }
 
 
-SearchByTitleLibrary();
+void SearchByCodeLibrary()
+{
+    int codeSearched = user.SearchByCode();
+
+    foreach (Document document in documents)
+    {
+        
+        if (document.GetType() == book.GetType())
+        {
+            Book libro = (Book)document;
+            if (codeSearched == libro.bookIsbn)
+            {
+                Console.WriteLine(libro.ReadInformation());
+            }
+        }
+        else
+        {
+            Dvd dvd = (Dvd)document;
+            if (codeSearched == dvd.serialNumber)
+            {
+                Console.WriteLine(dvd.ReadInformation());
+            }
+        }
+            
+            
+            
+            
+    }
+}
+
+Console.Write("Vuoi cercare per 'titolo' o per 'codice'? ");
+
+string typeOfResearch = Console.ReadLine();
+
+if(typeOfResearch == "titolo")
+{
+    SearchByTitleLibrary();
+}
+else
+{
+    SearchByCodeLibrary();
+}
