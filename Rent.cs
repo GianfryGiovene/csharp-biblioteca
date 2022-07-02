@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace csharp_biblioteca
 {
-    internal class Loan
+    internal class Rent
     {
+        /************  OLD  ************
         RegisteredUser user;
         Document document;
 
@@ -23,10 +24,10 @@ namespace csharp_biblioteca
         public void LoanTime()
         {
             Console.WriteLine("Per quanto tempo vuoi tenerlo? ");
-            Console.Write("Inizio prestito(inserire una data nel formato gg/mm/A:  ");
+            Console.Write("Inizio prestito(inserire una data nel formato gg/mm/A: ");
             string dateStartLoan = Console.ReadLine();
 
-            Console.Write("Fine prestito(inserire una data nel formato gg/mm/A:  ");
+            Console.Write("Fine prestito(inserire una data nel formato gg/mm/A: ");
             string dateEndLoan = Console.ReadLine();
 
             Console.WriteLine("Il prestito inizerà in data {0} e dovrà essere restituito in data {1} confermare? y(es) o n(ot)", dateStartLoan, dateEndLoan);
@@ -34,14 +35,14 @@ namespace csharp_biblioteca
             char validator = char.Parse(Console.ReadLine());
             if (validator == 'y')
             {
-                document.takenFrom = utenteregistrato
+                document.returnDate = dateEndLoan;
+                document.takenFrom = $"cognome: {this.user.surname}, nome: {this.user.name}";
                 document.isAvailable = false;
-                Console.Write( $"inizio prestito in {dateStartLoan}, fine prestito in {dateEndLoan}");
+                Console.WriteLine( $"inizio prestito in {dateStartLoan}, fine prestito in {dateEndLoan}");
 
-
-            }
-
-            
+            } 
         }
+        ************  OLD  ************/
+        
     }
 }

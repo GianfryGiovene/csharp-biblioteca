@@ -8,6 +8,7 @@ namespace csharp_biblioteca
 {
     internal class Book : Document
     {
+        
         public int bookIsbn;
         int bookPages;
 
@@ -18,6 +19,7 @@ namespace csharp_biblioteca
         }
 
         public Book(string title, int year, string sector, string author) : base(title, year, sector, author) { }
+    
     }
 
     

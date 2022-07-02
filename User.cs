@@ -4,15 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*******  Gli utenti  *******
+si possono registrare al sistema, fornendo:
+cognome,
+nome,
+email,
+password,
+recapito telefonico,
+*/
+
+
+
 namespace csharp_biblioteca
 {
-    internal class RegisteredUser
+    internal class User
     {
         string surname;
         string name;
         string email;
         string password;
         string telephone;
+
+
+        public User(string surname, string name, string email, string password, string telephone) :base()
+        {
+            this.surname = surname;
+            this.name = name;
+            this.email = email;
+            this.password = password;
+            this.telephone = telephone;
+        }
+
+
+
+
+
+        /************  OLD  ************
 
         public RegisteredUser(string surname, string name, string email, string password, string telephone)
         {
@@ -23,19 +50,6 @@ namespace csharp_biblioteca
             this.password = password;
             this.telephone = telephone;
 
-        }
-
-        public Loan getALoan(Document document)
-        {
-            if (document.isAvailable)
-            {
-
-                Loan loan = new Loan(this, document);
-
-                return loan;
-            }
-            return null;
-            
         }
 
         public string ShowUserInformation()
@@ -57,6 +71,7 @@ namespace csharp_biblioteca
 
             return codiceCercato;
         }
+        ************  OLD  ************/
 
 
     }

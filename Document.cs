@@ -8,17 +8,19 @@ namespace csharp_biblioteca
 {
     internal class Document
     {
-        public string title;
+        
+        public string Title { get; private set; }
         int year;
         string sector;
-        public bool isAvailable;
-        public string takenFrom;
+        public bool IsAvailable { get; set; }
+        string takenFrom;
+        string returnDate;
         string author;
-        int shelfNumber; 
-
+        
+        
         public Document(string title, int year, string sector,string author)
         {
-            this.title = title;
+            this.Title = title;
             this.year = year;
             this.sector = sector;
             this.author = author;
@@ -26,9 +28,8 @@ namespace csharp_biblioteca
 
         public string SetInformation()
         {
-            return $"Titolo: {title}\nAnno: {year}\nGenere: {sector}\nDisponibilità : {isAvailable}\nAutore: {author}\n\n";
+            return $"Titolo: {Title}\nAnno: {year}\nGenere: {sector}\nDisponibilità : {IsAvailable} | preso da: {takenFrom} | verra restituito: {returnDate}\nAutore: {author}\n\n";
         }
-
-        
     }
+
 }
