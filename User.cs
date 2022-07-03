@@ -17,22 +17,25 @@ recapito telefonico,
 
 namespace csharp_biblioteca
 {
-    internal class User
+    internal class User : Guest
     {
-        string surname;
-        string name;
-        string email;
-        string password;
-        string telephone;
+        public string Surname { get; private set; }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        public string Password { get; private set; }
+        public string Telephone { get; private set; }
+        public string Username { get; private set; }
 
 
         public User(string surname, string name, string email, string password, string telephone) :base()
         {
-            this.surname = surname;
-            this.name = name;
-            this.email = email;
-            this.password = password;
-            this.telephone = telephone;
+            this.Surname = surname;
+            this.Name = name;
+            this.Email = email;
+            this.Password = password;
+            this.Telephone = telephone;
+            this.Username = surname + name;
+
         }
 
 

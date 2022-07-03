@@ -11,7 +11,7 @@ recapito telefonico,
 
 
 Gli utenti 
-registrati possono effettuare  
+registrati possono effettuare  ricerca
     sui 
 documenti che sono di vario tipo (libri, DVD).
 I documenti sono caratterizzati da:
@@ -83,8 +83,8 @@ documents[1].IsAvailable = false;
 documents[2].IsAvailable = true;
 
 Guest guest = new Guest();
-
-Console.WriteLine("***** Menù Ospite *****\n\nCosa si vuole fare?\n1 - Registrarsi\n2 - Ricercare documenti");
+users.Add(new User("Prencipe", "Carlo", "pippo@libero.it", "password123", "3271259845"));
+Console.WriteLine("***** Menù Ospite *****\n\nCosa si vuole fare?\n1 - Registrarsi\n2 - Ricercare documenti\n3 - LogIn\n4 - Ricerca prestiti");
 int validator = Int32.Parse(Console.ReadLine());
 
 switch(validator)
@@ -92,6 +92,7 @@ switch(validator)
     case 1:
 
         User user = guest.GuestRegistration();
+        users.Add(user);
         break;
 
     case 2:
@@ -99,10 +100,97 @@ switch(validator)
         Document document = SearchInDocuments(documents);
 
         break;
+    case 3:
+
+        User userLogged = LogIn(users);
+        Thread.Sleep(2000);
+        Console.Clear();
+        Console.WriteLine("Passare alla sezione Noleggio?\n1 - si\n2 - no");
+        validator = Int32.Parse(Console.ReadLine());    
+
+        if (validator == 1)
+        {
+            RentADocument(documents, userLogged);
+        }
+        break;
+    case 4:
+        findUserRents(rents);
+        break;
+}
+// login
+
+User LogIn(List<User> users)
+{
+    Console.Write("Inserire Username: ");
+    string username = Console.ReadLine();  
+    Console.Write("Inserire Password :");
+    string password = Console.ReadLine();
+    Console.Clear();
+    foreach (User user in users)
+    {
+        if(user.Username == username && user.Password == password)
+        {
+
+            Console.WriteLine("*** Sei Loggato ***");
+            return user;
+        }
+        else
+        {
+
+            Console.WriteLine("*** Nome o Password non validi ***");
+            return null;
+
+        }
+    }
+    return null;
+}
+//metodo ricerca prestiti per nome utente
+void findUserRents(List<Rent> rents)
+{
+    Console.Write("Inserire nome persona che si vuole cercare: ");
+    string nameInput = Console.ReadLine();
+    Console.Write("Inserire cognome persona che si vuole cercare: ");
+    string surnameInput = Console.ReadLine();
+
+    foreach (Rent rent in rents)
+    {
+        if (nameInput == rent.User.Name && surnameInput == rent.User.Surname)
+        {
+            Console.Write("nome: {0}\ncognome: {1}\nemail: {2}\ntelephone: {3}\n\n ***** Informazioni documenti *****\n{4}\n", rent.User.Name, rent.User.Surname, rent.User.Email, rent.User.Telephone, rent.Document.SetInformation());
+        }
+
+    }
+
+}
+// metodi ricerca documenti
+
+void RentADocument(List<Document> documents, User user)
+{
+    Console.WriteLine("**** Noleggio documenti ****\n");
+
+    Document findDocument = SearchInDocuments(documents);
+
+    if (findDocument.IsAvailable)
+    {
+        Console.WriteLine("\nDocumento disponibile, noleggiarlo?\n1 - si\n2 - no");
+        int rentValidator = Int32.Parse(Console.ReadLine());
+        if (rentValidator == 1)
+        {
+            findDocument.takenTo = DateTime.Today.ToShortDateString();
+
+            Console.Write("Inizio prestito del documento: {0} ", findDocument.takenTo);
+            
+            Console.Write("Fine del prestito (gg/mm/aaaa): ");
+            findDocument.returnDate = Console.ReadLine();
+            Rent rent = new Rent(user, findDocument, findDocument.takenTo, findDocument.returnDate);
+            rents.Add(rent);
+
+        }
+    }
 }
 
 
-// funzione ricerca documenti
+
 Document SearchInDocuments(List<Document> documents)
 {
     Document document;
@@ -127,14 +215,17 @@ Document SearchInDocuments(List<Document> documents)
 }
 
 
-    // metodi ricerca documento
-    string SearchByTitle()
+    // salva titolo
+string SearchByTitle()
 {
     Console.Write("\nInserire il titolo che si vuole cercare: ");
     string titoloCercato = Console.ReadLine();
     Console.Clear();
     return titoloCercato;
-}
+}   
+
+    // salva codice
+
 int SearchByCode()
 {
     Console.Write("Cerca per codice: ");
@@ -159,7 +250,7 @@ Document SearchByTitleLibrary(string wordSearched)
 }
 
 
-// funzione ricerca  per codice
+// funzione ricerca per codice
 
 Document SearchByCodeLibrary(int codeSearched)
 {

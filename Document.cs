@@ -13,8 +13,8 @@ namespace csharp_biblioteca
         int year;
         string sector;
         public bool IsAvailable { get; set; }
-        string takenFrom;
-        string returnDate;
+        public string takenTo;
+        public string returnDate;
         string author;
         
         
@@ -28,7 +28,7 @@ namespace csharp_biblioteca
 
         public string SetInformation()
         {
-            return $"Titolo: {Title}\nAnno: {year}\nGenere: {sector}\nDisponibilità : {IsAvailable} | preso da: {takenFrom} | verra restituito: {returnDate}\nAutore: {author}\n\n";
+            return $"Titolo: {Title}\nAnno: {year}\nGenere: {sector}\nDisponibilità : {IsAvailable} | preso da: {takenTo} | verra restituito: {returnDate}\nAutore: {author}\n\n";
         }
     }
 

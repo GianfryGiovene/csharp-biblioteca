@@ -8,19 +8,22 @@ namespace csharp_biblioteca
 {
     internal class Rent
     {
-        /************  OLD  ************
-        RegisteredUser user;
-        Document document;
+        
+        public User User { get; private set; }
+        public Document Document { get; private set; }
 
-        string dateStartLoan;
-        string dateEndLoan;
+        string dateStartRent;
+        string dateEndRent;
 
-        public Loan(RegisteredUser user, Document document)
+        public Rent(User user, Document document, string dateStartRent, string dateEndRent)
         {
-            this.user = user;
-            this.document = document;
+            this.User = user;
+            this.Document = document;
+            this.dateEndRent = dateEndRent;
+            this.dateStartRent = dateStartRent;
         }
 
+        /************  OLD  ************
         public void LoanTime()
         {
             Console.WriteLine("Per quanto tempo vuoi tenerlo? ");
@@ -43,6 +46,6 @@ namespace csharp_biblioteca
             } 
         }
         ************  OLD  ************/
-        
+
     }
 }
